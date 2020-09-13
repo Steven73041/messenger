@@ -1,0 +1,53 @@
+.registerErrors {
+    background-color: rgba(255, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 20px;
+    height: max-content;
+    max-width: 600px;
+    margin: 0 auto;
+    list-style-position: inside;
+    margin-top: 20px;
+}
+
+.register,
+.login {
+    margin: 20px;
+    background-color: var(--messenger-background);
+    border-radius: 20px;
+    height: max-content;
+}
+
+.registerButton, .loginButton {
+    background-color: var(--messenger-color) !important;
+    border: 0;
+    color: #fff !important;
+    font-weight: 800 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px;
+    margin-top: 20px !important;
+}
+
+.login button, .registerButton button {
+    cursor: pointer;
+    background-color: var(--messenger-color) !important;
+    border: 0;
+    color: #fff !important;
+    font-weight: 800 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 35px;
+    min-width: 100px;
+    margin: 5px;
+    margin-top: 20px !important;
+}
+
+.register, .login {
+    padding: 20px;
+}
+
+@media screen and (max-width: 930px) {
+    .register, .login {
+        margin: 20px auto;
+    }
+}

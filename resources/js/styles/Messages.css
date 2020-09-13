@@ -1,0 +1,103 @@
+.messagesScreen {
+    padding: 30px 0 0 0;
+}
+
+.messagesList {
+    height: calc(87vh - 55px);
+    overflow-y: scroll;
+    -ms-overflow-y: scroll;
+    padding: 20px;
+    background-color: rgb(245, 245, 245);
+}
+
+.messagesList::-webkit-scrollbar {
+    width: 10px;
+}
+
+.messagesList::-webkit-scrollbar-thumb {
+    background: #44bec7;
+    border: 2px solid rgb(245, 245, 245);
+    border-radius: 10px;
+}
+
+.messagesList > li {
+    font-weight: 400;
+    font-size: 13px;
+    list-style-type: none;
+    align-items: center;
+}
+
+.messagesList > li > div.contentBody > div {
+    margin-right: auto;
+}
+
+.content {
+    min-width: 80%;
+}
+
+.content p {
+    margin-bottom: 0;
+}
+
+.messagesList > li > div.contentBody {
+    min-width: 40%;
+    max-width: 66%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: silver;
+    display: flex;
+}
+
+.messagesList > li.owner > div.contentBody {
+    background-color: #44bec7;
+}
+
+.messagesList > li.owner > div,
+.messagesList > li > div.contentBody > div {
+    margin-left: auto;
+}
+
+.messageUserEmail {
+    font-size: 13px;
+    color: rgb(143, 141, 141);
+}
+
+.message {
+    display: flex;
+    margin: 5px;
+}
+
+.contentButton {
+    margin-left: 5px !important;
+}
+
+.messageDelete {
+    padding: 5px 5px !important;
+    min-width: 35px !important;
+    background-color: #f90 !important;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.messageDelete:hover {
+    background-color: #f00 !important;
+    color: #000;
+    transition: linear all 0.4s;
+}
+
+.messageDisplayName {
+    font-size: 12px;
+    color: #fff;
+    margin-left: 4px;
+}
+
+.messageText {
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+.messageTimestamp {
+    font-size: 11px;
+    margin-top: 10px;
+    margin-left: 4px;
+}

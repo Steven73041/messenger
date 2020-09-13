@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    --messenger-color: #50b7f5;
+    --messenger-background: #e6ecf0;
+}
+
+.errors {
+    background-color: rgba(255, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 20px;
+    height: max-content;
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+    list-style: none;
+}
+
+label {
+    margin-bottom: 0.2rem;
+}

@@ -1,0 +1,57 @@
+ul.usersList {
+    padding: 15px;
+    margin-top: 20px;
+    max-width: 450px;
+}
+
+ul.usersList > li {
+    list-style: none;
+    text-align: center;
+    text-decoration: none;
+    color: #0f0f0f;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+}
+
+.usersList > li.d-none {
+    display: none !important;
+}
+
+ul.usersList > li:nth-child(even) {
+    background-color: #526ff2;
+}
+
+ul.usersList > li:nth-child(odd) {
+    background-color: #f2ad52;
+}
+
+ul.usersList > li > a {
+    text-decoration: none;
+    color: #0f0f0f;
+    font-weight: 600;
+    padding: 10px;
+}
+
+ul.usersList > li:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+ul.usersList > li:hover a {
+    color: #fff;
+}
+
+.userLogoutButtonContainer {
+    padding: 20px;
+    text-align: center;
+}
+
+.userLogout {
+    color: #fff !important;
+    background-color: #e3342f !important;
+    border-color: #e3342f !important;
+    border-radius: 20px !important;
+}
+

@@ -1,0 +1,18 @@
+.sendMessageInput {
+    border: 0;
+    padding: 5px 10px;
+    min-width: 350px;
+}
+
+.sendMessageBox {
+    padding: 20px;
+    border-top: 1px solid #000;
+}
+
+.sendMessageButton {
+    margin-left: auto;
+}
+
+.sendMessageForm {
+    display: flex;
+}
