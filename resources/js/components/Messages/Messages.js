@@ -45,16 +45,15 @@ const Messages = () => {
         <div className="messagesScreen row">
             <Sidebar/>
             <div className="messages col-sm-8">
-                <FlipMove>
-                    {messages[0]?.name && <h3>{messages[0].name}</h3>}
-                    {messages.length ?
-                        <ul id="messagesList" className="messagesList">
-                            {messages.map(item => (
-                                <Message currentUserMessage={user.id === item.message.userId}
-                                         message={item.message} key={item.message.id} user={item.user} email={id}/>
-                            ))}
-                        </ul> : <div>No messages found</div>}
-                </FlipMove>
+                {messages[0]?.name && <h3>{messages[0].name}</h3>}
+                {messages.length ?
+                    <FlipMove typeName="ul" id="messagesList" className="messagesList">
+                        {messages.map(item => (
+                            <Message currentUserMessage={user.id === item.message.userId}
+                                     message={item.message} key={item.message.id} user={item.user} email={id}/>
+                        ))}
+                    </FlipMove> : <div>No messages found</div>}
+
                 {errors ? <ul className="errors">
                     {errors.map(error => (
                         <li key={error}>{error}</li>

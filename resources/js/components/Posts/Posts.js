@@ -4,6 +4,7 @@ import Post from './Post';
 import Constants from "../Constants";
 import '../../styles/Posts.css';
 import PostBox from "./PostBox";
+import FlipMove from 'react-flip-move';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -39,11 +40,11 @@ const Posts = () => {
                 <PostBox/>
                 <div className="postsContainer">
                     {posts.length ?
-                        <ul id="postsList" className="postsList">
+                        <FlipMove typeName="ul" id="postsList" className="postsList">
                             {posts.map(item => (
                                 <Post user={item.user} post={item.post} key={item.post.id}/>
                             ))}
-                        </ul> : <div>No Posts found</div>}
+                        </FlipMove> : <div>No Posts found</div>}
                 </div>
                 {errors ? <ul className="errors">
                     {errors.map(error =>

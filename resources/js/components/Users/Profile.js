@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import '../../styles/Profile.css';
 import '../../styles/Posts.css';
 import Post from "../Posts/Post";
+import FlipMove from "react-flip-move";
 
 const Profile = () => {
     let {userId} = useParams();
@@ -87,11 +88,11 @@ const Profile = () => {
                     </div>
                     <div className="row justify-content-center postsContainer">
                         {posts.length &&
-                        <ul id="postsList" className="postsList profilePostsList">
+                        <FlipMove typeName="ul" id="postsList" className="postsList profilePostsList">
                             {posts.map(item => (
                                 <Post user={profile} post={item} key={item.id}/>
                             ))}
-                        </ul>}
+                        </FlipMove>}
                     </div>
                 </div>
                 :

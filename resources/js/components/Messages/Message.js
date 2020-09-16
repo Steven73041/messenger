@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {Avatar, Button} from '@material-ui/core';
 import Constants from "../Constants";
 import {useStateValue} from "../../StateProvider";
 import {Link} from 'react-router-dom';
 
-const Message = ({message, user, currentUserMessage}) => {
+const Message = forwardRef(({message, user, currentUserMessage}, ref) => {
     const [{token}] = useStateValue();
 
     const deleteMessage = (e) => {
@@ -26,7 +26,7 @@ const Message = ({message, user, currentUserMessage}) => {
     }
 
     return (
-        <li className={`message` + (currentUserMessage ? ` owner` : ``)}>
+        <li ref={ref} className={`message` + (currentUserMessage ? ` owner` : ``)}>
             <div className="contentBody">
 
                 {!currentUserMessage &&
@@ -53,5 +53,5 @@ const Message = ({message, user, currentUserMessage}) => {
                 </div> : null}
         </li>
     );
-}
+});
 export default Message;

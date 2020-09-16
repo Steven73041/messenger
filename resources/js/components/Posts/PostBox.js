@@ -20,8 +20,8 @@ const PostBox = () => {
                     Authorization: 'Bearer ' + token,
                 }
             }).then(response => {
-                setText(null);
-                setImage(null);
+                setText('');
+                setImage('');
                 if (response.data.errors) {
                     setErrors(response.data.errors);
                 }
