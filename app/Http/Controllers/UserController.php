@@ -14,8 +14,13 @@ class UserController extends Controller {
 
     public function show($userId) {
         $user = User::find($userId);
+        $currentUser = auth('api')->user();
+        $following = $currentUser->followings()->where('users.id', $user->id)->get();
         if ($user) {
-            return response($user, 200);
+            return response([
+                'user' => $user,
+                'following' => !empty($following[0])
+            ], 200);
         } else {
             return response(['errors' => ['There is no user.']], 200);
         }

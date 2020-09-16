@@ -24,11 +24,10 @@ class FollowerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $user = auth('api')->user();
-        $follower = User::find($request->id);
+        $follower = User::find($request->userId);
         if ($follower) {
-            $user->followers()->attach($follower->id);
-            return response(['message' => 'Followed!'], 200);
+            $follower->followers()->attach(auth('api')->user()->id);
+            return response(['message' => 'followed'], 200);
         } else {
             return response(['error' => 'There was an error during the process'], 200);
         }
@@ -51,11 +50,10 @@ class FollowerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request) {
-        $user = auth('api')->user();
-        $follower = User::find($request->id);
+        $follower = User::find($request->userId);
         if ($follower) {
-            $user->followers()->detach($follower->id);
-            return response(['message' => 'Unfollowed!'], 200);
+            $follower->followers()->detach(auth('api')->user()->id);
+            return response(['message' => 'unfollowed'], 200);
         } else {
             return response(['errors' => ['There was an error during the process']], 200);
         }

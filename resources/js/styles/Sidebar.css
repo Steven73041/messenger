@@ -49,6 +49,7 @@ ul.usersList > li:hover a {
 }
 
 .userLogout {
+    text-transform: none !important;
     color: #fff !important;
     background-color: #e3342f !important;
     border-color: #e3342f !important;

@@ -23,5 +23,25 @@ const Constants = {
     followings: 'followings',
     follow: 'follow',
     unfollow: 'unfollow',
+    followFunction: (e, token, userId) => {
+        e.preventDefault();
+        return window.axios.post(`${Constants.domain}${Constants.follow}`, {
+            userId: userId
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        });
+    },
+    unfollowFunction: (e, token, userId) => {
+        e.preventDefault();
+        return window.axios.post(`${Constants.domain}${Constants.unfollow}`, {
+            userId: userId
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        });
+    }
 };
 export default Constants;

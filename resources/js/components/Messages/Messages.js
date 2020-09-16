@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import Message from './Message';
 import Sidebar from '../Sidebar';
-import SendMessageBox from '../SendMessageBox';
+import SendMessageBox from './SendMessageBox';
 import '../../styles/Messages.css';
 import FlipMove from 'react-flip-move';
 import {useStateValue} from '../../StateProvider';
@@ -43,9 +43,10 @@ const Messages = () => {
 
     return (
         <div className="messagesScreen row">
-            <Sidebar currentUser={user}/>
+            <Sidebar/>
             <div className="messages col-sm-8">
                 <FlipMove>
+                    {messages[0]?.name && <h3>{messages[0].name}</h3>}
                     {messages.length ?
                         <ul id="messagesList" className="messagesList">
                             {messages.map(item => (
@@ -60,7 +61,7 @@ const Messages = () => {
                         <li key={error}>{error}</li>
                     ))}
                 </ul> : null}
-                <SendMessageBox receiverUserId={id} />
+                <SendMessageBox receiverUserId={id}/>
             </div>
         </div>
     );

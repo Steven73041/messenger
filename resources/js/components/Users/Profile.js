@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {useStateValue} from '../../StateProvider';
-import {Button, Avatar} from '@material-ui/core';
+import {Avatar} from '@material-ui/core';
 import Constants from "../Constants";
 import {useParams} from 'react-router-dom';
 import '../../styles/Profile.css';
+import '../../styles/Posts.css';
 import Post from "../Posts/Post";
-import FlipMove from "react-flip-move";
 
 const Profile = () => {
     let {userId} = useParams();
+    const [following, setFollowing] = useState(null);
     const [{user, token}] = useStateValue();
     const [profile, setProfile] = useState({});
     const [posts, setPosts] = useState([]);
@@ -26,7 +27,8 @@ const Profile = () => {
             }
         }).then(response => {
             if (!response.data.errors) {
-                setProfile(response.data);
+                setFollowing(response.data.following);
+                setProfile(response.data.user);
             } else {
                 setErrors(response.data.errors);
             }
@@ -41,17 +43,24 @@ const Profile = () => {
                 Authorization: 'Bearer ' + token
             }
         }).then(response => {
-            console.log(response);
             if (!response.data.errors) {
                 setPosts(response.data);
             } else {
                 setErrors(response.data.errors);
             }
         }).catch(response => {
-            console.log(response);
             setErrors(response.data.errors);
         });
     }
+
+    const followingUser = (response) => {
+        if (response.data.message === 'followed') {
+            setFollowing(true);
+        } else {
+            setFollowing(false);
+        }
+    }
+
 
     return (
         <div className={`profile profile-${userId}`}>
@@ -62,17 +71,28 @@ const Profile = () => {
                             <Avatar className="profileAvatar" src={user.photoUrl}/>
                         </div>
                         <div className="col-sm-9">
-                            <h2 className="profileName">{profile.name}</h2>
+                            <h2 className="profileName">
+                                {profile.name}
+                                {user.id !== profile.id && <div className="followButtons">
+                                    {!following ?
+                                        <a className="btn btn-primary"
+                                           onClick={e => Constants.followFunction(e, token, profile.id).then(response => followingUser(response))}>Follow</a>
+                                        :
+                                        <a className="btn btn-outline-primary"
+                                           onClick={e => Constants.unfollowFunction(e, token, profile.id).then(response => followingUser(response))}>Unfollow</a>
+                                    }
+                                </div>}
+                            </h2>
                             <span className="profileCreated">Joined: {profile.created_at}</span>
                         </div>
                     </div>
-                    <div className="row justify-content-center">
-                        {posts.length ?
-                            <ul id="postsList" className="postsList profilePostsList">
-                                {posts.map(item => (
-                                    <Post user={profile} post={item} key={item.id}/>
-                                ))}
-                            </ul> : <div><h3>No Posts found</h3></div>}
+                    <div className="row justify-content-center postsContainer">
+                        {posts.length &&
+                        <ul id="postsList" className="postsList profilePostsList">
+                            {posts.map(item => (
+                                <Post user={profile} post={item} key={item.id}/>
+                            ))}
+                        </ul>}
                     </div>
                 </div>
                 :

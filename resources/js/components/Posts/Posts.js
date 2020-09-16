@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useStateValue} from "../../StateProvider";
 import Post from './Post';
-import FlipMove from "react-flip-move";
 import Constants from "../Constants";
 import '../../styles/Posts.css';
 import PostBox from "./PostBox";
@@ -35,17 +34,17 @@ const Posts = () => {
     };
 
     return (
-        <div className="postsScreen row">
-            <div className="posts col-sm-8">
+        <div className="postsScreen row justify-content-center">
+            <div className="posts col-sm-10">
                 <PostBox/>
-                <FlipMove>
+                <div className="postsContainer">
                     {posts.length ?
                         <ul id="postsList" className="postsList">
                             {posts.map(item => (
                                 <Post user={item.user} post={item.post} key={item.post.id}/>
                             ))}
                         </ul> : <div>No Posts found</div>}
-                </FlipMove>
+                </div>
                 {errors ? <ul className="errors">
                     {errors.map(error =>
                         <li key={error}>{error}</li>

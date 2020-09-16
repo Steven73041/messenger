@@ -2,17 +2,53 @@ import React, {useEffect, useState} from 'react';
 import '../styles/Header.css';
 import {Link} from 'react-router-dom';
 import {useStateValue} from '../StateProvider';
+import {Button} from "@material-ui/core";
+import Constants from './Constants';
+import {actionTypes} from '../reducer';
 
 const Header = () => {
-    const [{user}] = useStateValue();
+    const [{user, token}, dispatch] = useStateValue();
     const [menuItems, setMenuItems] = useState([
         ["Home", "/"],
         ["Read me", "/read-me/"],
     ]);
 
     useEffect(() => {
-
     }, []);
+
+    const logout = (e) => {
+        e.preventDefault();
+        window.axios.post(`${Constants.domain}${Constants.logout}`, {}, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        }).then(response => {
+            if (response.data) {
+                //remove token
+                dispatch({
+                    type: actionTypes.SET_TOKEN_TERM,
+                    token: null,
+                });
+
+                //remove user
+                dispatch({
+                    type: actionTypes.SET_USER_TERM,
+                    user: {},
+                });
+
+                //let's remove messages till redirection
+                let items = document.querySelectorAll('#messagesList>li');
+                items.forEach(item => {
+                    item.remove();
+                });
+
+                //redirect
+                window.location.href = "/";
+            }
+        }).catch(response => {
+            console.log(response);
+        });
+    };
 
     const activeMenuItem = (e) => {
         let target = e.target;
@@ -31,7 +67,7 @@ const Header = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar-nav w-100">
                     {menuItems.map(item =>
                         <li className={"nav-item"} key={item[1]}>
                             <Link className={`menuItem nav-link ${item[1] === '/' ? `active` : null}`}
@@ -39,9 +75,15 @@ const Header = () => {
                         </li>
                     )}
                     {user ?
-                        <li className={"nav-item"} key={"profile"}>
-                            <Link className="menuItem nav-link" onClick={e => activeMenuItem(e)} to={"/profile/edit"}>Profile</Link>
-                        </li> : null}
+                        (<li className={"nav-item"} key={"profile"}>
+                            <Link className="menuItem nav-link" onClick={e => activeMenuItem(e)}
+                                  to={"/profile/edit"}>Profile</Link>
+                        </li>) : null}
+                    {user ?
+                        (<li className={"nav-item ml-auto"} key={"logout"}>
+                            <Button className="menuItem nav-link userLogout btn btn-danger"
+                                    onClick={e => (logout(e))}>Logout</Button>
+                        </li>) : null}
                 </ul>
             </div>
         </nav>

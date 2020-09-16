@@ -6,6 +6,7 @@
 }
 
 body {
+    overflow: hidden;
     --messenger-color: #50b7f5;
     --messenger-background: #e6ecf0;
 }
@@ -22,4 +23,8 @@ body {
 
 label {
     margin-bottom: 0.2rem;
+}
+
+input.error, textarea.error, .error {
+    border: 1px solid #f00 !important;
 }

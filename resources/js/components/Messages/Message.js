@@ -17,7 +17,6 @@ const Message = ({messageId, currentUserMessage, text, timestamp, photoUrl, name
                 }
             }).then(response => {
                 if (response.data) {
-                    console.log(response.data);
                 }
             }).catch(error => {
                 alert(error.toString());

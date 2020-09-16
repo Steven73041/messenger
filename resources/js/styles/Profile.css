@@ -17,5 +17,10 @@
 }
 
 .profilePostsList {
+    margin-top: 50px;
     min-width: 600px;
+}
+
+.followButtons {
+    margin-left: 10px;
 }
