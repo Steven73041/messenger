@@ -37,7 +37,7 @@ const Message = ({message, user, currentUserMessage}) => {
                 <div className="content">
                     <p className="messageDisplayName">{user.name}</p>
                     <p className="messageText">{message.text}</p>
-                    <p className="messageTimestamp">{message.timestamp}</p>
+                    <p className="messageTimestamp">{message.created_at}</p>
                 </div>
 
                 {currentUserMessage &&
