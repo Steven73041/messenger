@@ -50,9 +50,8 @@ const Messages = () => {
                     {messages.length ?
                         <ul id="messagesList" className="messagesList">
                             {messages.map(item => (
-                                <Message currentUserMessage={user.id === item.message.userId} name={item.user.name}
-                                         text={item.message.text} key={item.message.id} messageId={item.message.id}
-                                         timestamp={item.message.created_at} photoUrl={item.user.photoUrl}/>
+                                <Message currentUserMessage={user.id === item.message.userId}
+                                         message={item.message} key={item.message.id} user={item.user} email={id}/>
                             ))}
                         </ul> : <div>No messages found</div>}
                 </FlipMove>

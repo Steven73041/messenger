@@ -2,15 +2,16 @@ import React from 'react';
 import {Avatar, Button} from '@material-ui/core';
 import Constants from "../Constants";
 import {useStateValue} from "../../StateProvider";
+import {Link} from 'react-router-dom';
 
-const Message = ({messageId, currentUserMessage, text, timestamp, photoUrl, name}) => {
+const Message = ({message, user, currentUserMessage}) => {
     const [{token}] = useStateValue();
 
     const deleteMessage = (e) => {
         e.preventDefault();
         if (currentUserMessage) {
             window.axios.post(`${Constants.domain}${Constants.deleteMessage}`, {
-                id: messageId,
+                id: message.id,
             }, {
                 headers: {
                     Authorization: 'Bearer ' + token
@@ -27,13 +28,23 @@ const Message = ({messageId, currentUserMessage, text, timestamp, photoUrl, name
     return (
         <li className={`message` + (currentUserMessage ? ` owner` : ``)}>
             <div className="contentBody">
-                {!currentUserMessage ? <Avatar src={photoUrl}/> : null}
+
+                {!currentUserMessage &&
+                <Link to={`/profile/${user.id}`}>
+                    <Avatar src={user.photoUrl}/>
+                </Link>}
+
                 <div className="content">
-                    <p className="messageDisplayName">{name}</p>
-                    <p className="messageText">{text}</p>
-                    <p className="messageTimestamp">{timestamp}</p>
+                    <p className="messageDisplayName">{user.name}</p>
+                    <p className="messageText">{message.text}</p>
+                    <p className="messageTimestamp">{message.timestamp}</p>
                 </div>
-                {currentUserMessage ? <Avatar src={photoUrl}/> : null}
+
+                {currentUserMessage &&
+                <Link to={`/profile/${user.id}`}>
+                    <Avatar src={user.photoUrl}/>
+                </Link>}
+
             </div>
             {currentUserMessage ?
                 <div className="contentButton">

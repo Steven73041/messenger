@@ -14,10 +14,26 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $currentUser = auth('api')->user();
+        $followings = $currentUser->followings;
+
+        //add current user ID in array to fetch his posts
+        $ids_arr = [];
+        $ids_arr[] = $currentUser->id;
+
+        //loop through users to get their ids
+        foreach ($followings as $following) {
+            $ids_arr[] = $following->id;
+        }
+
+        //query only posts by followings ids
+        $posts = Post::whereIn('userId', $ids_arr)->orderBy('created_at', 'desc')->get();
         if (!empty($posts)) {
+
+            //response array
             $response = [];
             foreach ($posts as $post) {
+                //add user (to get his attributes in post) and his post
                 $response[] = [
                     'post' => $post,
                     'user' => $post->user,
@@ -51,8 +67,7 @@ class PostController extends Controller {
      */
     public function store(Request $request) {
         $post = new Post();
-        $current_userID = auth('api')->user()->id;
-        $post->userId = $current_userID;
+        $post->userId = auth('api')->user()->id;
         $post->text = $request->text;
         $post->image = $request->image;
         date_default_timezone_set('Europe/Athens');
