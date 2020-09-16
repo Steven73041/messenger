@@ -29,6 +29,14 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y H:i',
+    ];
+
+    public function posts() {
+        return $this->hasMany(Post::class, 'userId', 'id');
+    }
+
     public function messages() {
         return $this->hasMany(Message::class);
     }

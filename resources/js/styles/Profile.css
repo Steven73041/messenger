@@ -1,3 +1,21 @@
 .profile {
     padding: 20px;
 }
+
+.profileAvatar {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.profileName {
+    height: 75%;
+    display: flex;
+    align-items: center;
+}
+
+.profileCreated {
+}
+
+.profilePostsList {
+    min-width: 600px;
+}

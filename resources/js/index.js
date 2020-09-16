@@ -29,7 +29,7 @@ const App = () => {
                             {!user ? <AuthenticationScreen/> : <HomeScreen/>}
                         </Route>
                         <Route path="/chat/:id" children={<Messages/>}/>
-                        <Route path="/profile/edit" children={<EditProfile/>}/>
+                        <Route exact path="/profile/edit" children={<EditProfile/>}/>
                         <Route path="/profile/:userId" children={<Profile/>}/>
                         <Route children={<NotFound/>}/>
                     </Switch>

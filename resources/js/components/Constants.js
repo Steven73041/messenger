@@ -14,6 +14,7 @@ const Constants = {
     sendMessage: 'messages/store',
     deleteMessage: 'messages/delete',
     //posts
+    getUserPosts: 'posts/get',
     posts: 'posts',
     sendPost: 'posts/store',
     deletePost: 'posts/delete',

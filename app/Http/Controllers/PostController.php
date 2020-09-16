@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Events\NewPost;
 use App\Post;
 use Illuminate\Http\Request;
@@ -25,6 +26,20 @@ class PostController extends Controller {
             return response($response, 200);
         } else {
             return response(['errors' => ['There are no posts']], 200);
+        }
+    }
+
+    /**
+     * Fetch all posts of user
+     * @param $userId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function getUserPosts($userId) {
+        $posts = Post::where('userId', $userId)->orderBy('created_at', 'desc')->get();
+        if (!empty($posts)) {
+            return response($posts, 200);
+        } else {
+            return response(['errors' => ['No Posts Found']], 200);
         }
     }
 

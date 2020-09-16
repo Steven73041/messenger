@@ -13,7 +13,12 @@ class UserController extends Controller {
     }
 
     public function show($userId) {
-        return response(User::where('id', $userId)->get(), 200);
+        $user = User::find($userId);
+        if ($user) {
+            return response($user, 200);
+        } else {
+            return response(['errors' => ['There is no user.']], 200);
+        }
     }
 
     public function update(Request $request) {
