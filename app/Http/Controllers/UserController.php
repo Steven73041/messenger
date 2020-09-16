@@ -12,6 +12,10 @@ class UserController extends Controller {
         return response(User::where('id', '!=', auth('api')->user()->id)->get(), 200);
     }
 
+    public function show($userId) {
+        return response(User::where('id', $userId)->get(), 200);
+    }
+
     public function update(Request $request) {
         $current_userID = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [

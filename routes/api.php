@@ -17,13 +17,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
     Route::get('/messages/{from}/{to}', 'MessageController@index');
     Route::get('/users', 'UserController@index');
+    Route::get('/users/get/{userId}', 'UserController@show');
+    Route::get('/posts', 'PostController@index');
+    Route::post('/posts/store', 'PostController@store');
     Route::put('/users/update/', 'UserController@update');
     Route::post('/messages/delete', 'MessageController@destroy');
     Route::post('/messages/store', 'MessageController@store');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('/follow/', 'FollowerController@store');
+    Route::delete('/unfollow/', 'FollowerController@destroy');
 });
 
 Route::group(['middleware' => ['cors', 'json.response']], function () {

@@ -40,7 +40,7 @@ const Header = () => {
                     )}
                     {user ?
                         <li className={"nav-item"} key={"profile"}>
-                            <Link className="menuItem nav-link" onClick={e => activeMenuItem(e)} to={"/profile"}>Profile</Link>
+                            <Link className="menuItem nav-link" onClick={e => activeMenuItem(e)} to={"/profile/edit"}>Profile</Link>
                         </li> : null}
                 </ul>
             </div>

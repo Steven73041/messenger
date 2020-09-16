@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NewUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -25,6 +26,7 @@ class ApiAuthController extends Controller {
         $user = User::create($request->toArray());
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['token' => $token, 'user' => $user];
+        event(new NewUser($user));
         return response($response, 200);
     }
 

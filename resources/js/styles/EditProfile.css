@@ -1,0 +1,29 @@
+.editProfile {
+    padding: 30px 0;
+}
+
+form.editProfileForm {
+    padding: 20px;
+    background-color: var(--messenger-background);
+    border-radius: 20px;
+}
+
+form.editProfileForm input {
+    min-width: 250px;
+    margin: 0 10px 10px 0;
+}
+
+form .updateButton {
+    padding: 10px !important;
+    margin: 10px 0;
+    background-color: var(--messenger-color) !important;
+    color: #fff;
+    border-radius: 20px;
+}
+
+.successMessage {
+    transition: opacity .6s linear;
+    opacity: 0;
+    color: #2d995b;
+    padding: 10px;
+}

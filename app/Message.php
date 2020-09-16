@@ -14,6 +14,10 @@ class Message extends Model {
         'text', 'userId', 'receiverUserId',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y H:i:s',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class, 'userId', 'id');
     }

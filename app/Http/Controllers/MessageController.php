@@ -16,6 +16,7 @@ class MessageController extends Controller {
      */
     public function index($from, $to) {
         $user_from = User::firstWhere('email', $from);
+//        $user_from = auth('api')->user();
         $user_to = User::firstWhere('email', $to);
         $messages = DB::table('messages')
             //query where sender is in ids of user send/receive

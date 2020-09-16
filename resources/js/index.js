@@ -3,14 +3,14 @@ import './App.css';
 import AuthenticationScreen from './components/AuthenticationScreen';
 import {StateProvider, useStateValue} from './StateProvider';
 import reducer, {initialState} from './reducer';
-// import Sidebar from './components/Sidebar';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Messages from './components/Messages';
-import Profile from './components/Profile';
+import Messages from './components/Messages/Messages';
+import EditProfile from './components/Users/EditProfile';
 import ReactDOM from 'react-dom';
 import Header from "./components/Header";
 import NotFound from './components/NotFound';
 import HomeScreen from "./components/HomeScreen";
+import Profile from "./components/Users/Profile";
 
 const App = () => {
     const [{user}] = useStateValue();
@@ -29,7 +29,8 @@ const App = () => {
                             {!user ? <AuthenticationScreen/> : <HomeScreen/>}
                         </Route>
                         <Route path="/chat/:id" children={<Messages/>}/>
-                        <Route path="/profile/" children={<Profile/>}/>
+                        <Route path="/profile/edit" children={<EditProfile/>}/>
+                        <Route path="/profile/:userId" children={<Profile/>}/>
                         <Route children={<NotFound/>}/>
                     </Switch>
                 </div>
