@@ -34,7 +34,9 @@ const App = () => {
                         <Route path="/chat/:id" children={<Messages/>}/>
                         <Route exact path="/profile/edit" children={<EditProfile/>}/>
                         <Route path="/profile/:userId" children={<Profile/>}/>
-                        <Route children={<NotFound/>}/>
+                        <Route path="/*">
+                            <NotFound/>
+                        </Route>
                     </Switch>
                 </div>
             </div>

@@ -13,14 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/**
- * Deactivate it, we use react router
- */
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/clear', function () {
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    return 1;
+});
 
 /**
  * We use this to always set index blade, we take routes from react-router
  */
-Route::view('/{path?}', 'index');
+Route::get('/{any}', 'PostController@homePage')->where('any', '.*');

@@ -108,4 +108,8 @@ class PostController extends Controller {
     public function destroy(Post $post) {
         //
     }
+
+    public function homePage() {
+        return view('index');
+    }
 }
