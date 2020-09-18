@@ -5,6 +5,7 @@ import Constants from "../Constants";
 import '../../styles/Posts.css';
 import PostBox from "./PostBox";
 import FlipMove from 'react-flip-move';
+import {actionTypes} from "../../reducer";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -26,11 +27,20 @@ const Posts = () => {
         }).then(response => {
             if (!response.data.errors) {
                 setPosts(response.data);
+
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.data.errors);
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         });
     };
 

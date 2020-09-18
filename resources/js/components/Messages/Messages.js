@@ -49,11 +49,11 @@ const Messages = () => {
                 loading: false,
             });
         }).catch(response => {
-            setErrors(response.data.errors);
             dispatch({
                 type: actionTypes.SET_LOADING_TERM,
                 loading: false,
             });
+            setErrors(response.data.errors);
         });
     };
 

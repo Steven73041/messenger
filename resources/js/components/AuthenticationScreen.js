@@ -45,19 +45,23 @@ const AuthenticationScreen = () => {
                     type: actionTypes.SET_USER_TERM,
                     user: response.data.user,
                 });
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
             } else {
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
                 setErrors(response.data.errors);
             }
-            dispatch({
-                type: actionTypes.SET_LOADING_TERM,
-                loading: false,
-            });
         }).catch(response => {
-            setErrors(response.errors);
             dispatch({
                 type: actionTypes.SET_LOADING_TERM,
                 loading: false,
             });
+            setErrors(response.errors);
         });
 
     };
