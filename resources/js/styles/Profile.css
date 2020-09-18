@@ -24,3 +24,15 @@
 .followButtons {
     margin-left: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .profilePostsList {
+        min-width: 520px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profilePostsList {
+        min-width: 480px;
+    }
+}

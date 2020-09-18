@@ -8,10 +8,10 @@ const Post = forwardRef(({user, post}, ref) => {
 
             <Link to={`profile/${user.id}`} className="postProfileLink">
                 <div className="post__header row align-items-center">
-                    <div className="post__avatar col-sm-1">
+                    <div className="post__avatar col-xs-1">
                         <Avatar src={user.photoUrl}/>
                     </div>
-                    <div className="post__headerText col-sm-11">
+                    <div className="post__headerText col-xs-11">
                         <h3>
                             {user.name}
                             <span className="post__timestamp">{post.created_at}</span>

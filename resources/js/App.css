@@ -6,7 +6,6 @@
 }
 
 body {
-    overflow: hidden;
     --messenger-color: #50b7f5;
     --messenger-background: #e6ecf0;
 }
