@@ -24,7 +24,7 @@ const App = () => {
             <div className="App">
                 <Header/>
                 <div className={"container"}>
-                    <div className={`loading ${!loading && `d-none`}`}>
+                    <div className={`loading ${!loading ? `d-none` : null}`}>
 
                     </div>
                     <Switch>
