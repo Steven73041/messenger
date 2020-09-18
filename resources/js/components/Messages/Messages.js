@@ -13,31 +13,30 @@ const Messages = () => {
     let {id} = useParams();
     const [messages, setMessages] = useState([]);
     const [errors, setErrors] = useState('');
-    const [{user, token, loading}, dispatch] = useStateValue();
+    const [{user, token}, dispatch] = useStateValue();
+
+    useEffect(() => {
+        fetchMessages(id);
+    }, [id]);
 
     useEffect(() => {
         window.Echo.channel(`messages.${user.id}`).listen(`.NewMessage`, (e) => {
-            fetchMessages();
+            fetchMessages(e.user.email);
         });
-        fetchMessages();
-    }, [id]);
+    }, []);
 
-    const fetchMessages = () => {
+    const fetchMessages = (email) => {
         dispatch({
             type: actionTypes.SET_LOADING_TERM,
             loading: true,
         });
-        window.axios.get(`${Constants.domain}${Constants.messages}/${id}/${user.email}`, {
+        window.axios.get(`${Constants.domain}${Constants.messages}/${email}/${user.email}`, {
             headers: {
                 Authorization: 'Bearer ' + token
             }
         }).then(response => {
             if (!response.data.errors) {
                 setMessages(response.data);
-                dispatch({
-                    type: actionTypes.SET_LOADING_TERM,
-                    loading: false,
-                });
                 const messagesList = document.getElementById("messagesList");
                 if (messagesList) {
                     messagesList.scrollTop = 1000;
@@ -45,8 +44,16 @@ const Messages = () => {
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.data.errors);
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         });
     };
 

@@ -45,15 +45,19 @@ const AuthenticationScreen = () => {
                     type: actionTypes.SET_USER_TERM,
                     user: response.data.user,
                 });
-                dispatch({
-                    type: actionTypes.SET_LOADING_TERM,
-                    loading: false,
-                });
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.errors);
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         });
 
     };
@@ -77,15 +81,19 @@ const AuthenticationScreen = () => {
                     type: actionTypes.SET_USER_TERM,
                     user: response.data.user,
                 });
-                dispatch({
-                    type: actionTypes.SET_LOADING_TERM,
-                    loading: false,
-                });
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.data.errors);
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         });
 
     };
@@ -164,7 +172,6 @@ const AuthenticationScreen = () => {
                         </form>
                     </div>
                 </div>
-
 
             </div>
         </>

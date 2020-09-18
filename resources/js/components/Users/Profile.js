@@ -44,6 +44,10 @@ const Profile = () => {
             });
         }).catch(response => {
             setErrors(response.data.errors);
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         });
     }
 
@@ -67,6 +71,10 @@ const Profile = () => {
                 loading: false,
             });
         }).catch(response => {
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
             setErrors(response.data.errors);
         });
     }

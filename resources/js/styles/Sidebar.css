@@ -31,7 +31,7 @@ ul.usersList > li > a {
     text-decoration: none;
     color: #0f0f0f;
     font-weight: 600;
-    padding: 10px;
+    display: block;
 }
 
 ul.usersList > li:hover {

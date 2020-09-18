@@ -3,13 +3,18 @@ import {Avatar, Button} from '@material-ui/core';
 import Constants from "../Constants";
 import {useStateValue} from "../../StateProvider";
 import {Link} from 'react-router-dom';
+import {actionTypes} from "../../reducer";
 
 const Message = forwardRef(({message, user, currentUserMessage}, ref) => {
-    const [{token}] = useStateValue();
+    const [{token}, dispatch] = useStateValue();
 
     const deleteMessage = (e) => {
         e.preventDefault();
         if (currentUserMessage) {
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: true,
+            });
             window.axios.post(`${Constants.domain}${Constants.deleteMessage}`, {
                 id: message.id,
             }, {
@@ -17,10 +22,16 @@ const Message = forwardRef(({message, user, currentUserMessage}, ref) => {
                     Authorization: 'Bearer ' + token
                 }
             }).then(response => {
-                if (response.data) {
-                }
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
             }).catch(error => {
                 alert(error.toString());
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
             });
         }
     }
