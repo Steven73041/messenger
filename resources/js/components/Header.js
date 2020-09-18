@@ -7,7 +7,7 @@ import Constants from './Constants';
 import {actionTypes} from '../reducer';
 
 const Header = () => {
-    const [{user, token}, dispatch] = useStateValue();
+    const [{user, token, loading}, dispatch] = useStateValue();
     const [menuItems, setMenuItems] = useState([
         ["Home", "/"],
         ["Read me", "/read-me/"],
@@ -18,6 +18,10 @@ const Header = () => {
 
     const logout = (e) => {
         e.preventDefault();
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        });
         window.axios.post(`${Constants.domain}${Constants.logout}`, {}, {
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -34,6 +38,11 @@ const Header = () => {
                 dispatch({
                     type: actionTypes.SET_USER_TERM,
                     user: {},
+                });
+
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
                 });
 
                 //let's remove messages till redirection

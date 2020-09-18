@@ -28,3 +28,14 @@ label {
 input.error, textarea.error, .error {
     border: 1px solid #f00 !important;
 }
+
+.loading {
+    cursor: progress;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    z-index: 2;
+}

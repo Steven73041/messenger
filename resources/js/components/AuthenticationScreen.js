@@ -25,6 +25,10 @@ const AuthenticationScreen = () => {
 
     const createAccount = (e) => {
         e.preventDefault();
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        })
         window.axios.post(`${Constants.domain}${Constants.register}`, {
             name: name,
             email: email,
@@ -41,6 +45,10 @@ const AuthenticationScreen = () => {
                     type: actionTypes.SET_USER_TERM,
                     user: response.data.user,
                 });
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
             } else {
                 setErrors(response.data.errors);
             }
@@ -52,6 +60,10 @@ const AuthenticationScreen = () => {
 
     const login = (e) => {
         e.preventDefault();
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        });
         window.axios.post(`${Constants.domain}${Constants.login}`, {
             email: loginMail,
             password: loginPassword,
@@ -64,6 +76,10 @@ const AuthenticationScreen = () => {
                 dispatch({
                     type: actionTypes.SET_USER_TERM,
                     user: response.data.user,
+                });
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
                 });
             } else {
                 setErrors(response.data.errors);

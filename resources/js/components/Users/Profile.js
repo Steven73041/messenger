@@ -7,11 +7,12 @@ import '../../styles/Profile.css';
 import '../../styles/Posts.css';
 import Post from "../Posts/Post";
 import FlipMove from "react-flip-move";
+import {actionTypes} from "../../reducer";
 
 const Profile = () => {
     let {userId} = useParams();
     const [following, setFollowing] = useState(null);
-    const [{user, token}] = useStateValue();
+    const [{user, token, loading}, dispatch] = useStateValue();
     const [profile, setProfile] = useState({});
     const [posts, setPosts] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -22,6 +23,10 @@ const Profile = () => {
     }, []);
 
     const getUserProfile = () => {
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        });
         window.axios.get(`${Constants.domain}${Constants.getUser}/${userId}`, {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -33,12 +38,20 @@ const Profile = () => {
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.data.errors);
         });
     }
 
     const getUserPosts = () => {
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        });
         window.axios.get(`${Constants.domain}${Constants.getUserPosts}/${userId}`, {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -49,6 +62,10 @@ const Profile = () => {
             } else {
                 setErrors(response.data.errors);
             }
+            dispatch({
+                type: actionTypes.SET_LOADING_TERM,
+                loading: false,
+            });
         }).catch(response => {
             setErrors(response.data.errors);
         });

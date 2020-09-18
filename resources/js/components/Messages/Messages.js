@@ -7,12 +7,13 @@ import '../../styles/Messages.css';
 import FlipMove from 'react-flip-move';
 import {useStateValue} from '../../StateProvider';
 import Constants from "./../Constants";
+import {actionTypes} from "../../reducer";
 
 const Messages = () => {
     let {id} = useParams();
     const [messages, setMessages] = useState([]);
     const [errors, setErrors] = useState('');
-    const [{user, token}] = useStateValue();
+    const [{user, token, loading}, dispatch] = useStateValue();
 
     useEffect(() => {
         window.Echo.channel(`messages.${user.id}`).listen(`.NewMessage`, (e) => {
@@ -22,6 +23,10 @@ const Messages = () => {
     }, [id]);
 
     const fetchMessages = () => {
+        dispatch({
+            type: actionTypes.SET_LOADING_TERM,
+            loading: true,
+        });
         window.axios.get(`${Constants.domain}${Constants.messages}/${id}/${user.email}`, {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -29,6 +34,10 @@ const Messages = () => {
         }).then(response => {
             if (!response.data.errors) {
                 setMessages(response.data);
+                dispatch({
+                    type: actionTypes.SET_LOADING_TERM,
+                    loading: false,
+                });
                 const messagesList = document.getElementById("messagesList");
                 if (messagesList) {
                     messagesList.scrollTop = 1000;

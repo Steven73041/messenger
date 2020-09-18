@@ -13,7 +13,7 @@ import HomeScreen from "./components/HomeScreen";
 import Profile from "./components/Users/Profile";
 
 const App = () => {
-    const [{user}] = useStateValue();
+    const [{user, loading}] = useStateValue();
 
     useEffect(() => {
 
@@ -24,6 +24,9 @@ const App = () => {
             <div className="App">
                 <Header/>
                 <div className={"container"}>
+                    <div className={`loading ${!loading && `d-none`}`}>
+
+                    </div>
                     <Switch>
                         <Route exact path="/">
                             {!user ? <AuthenticationScreen/> : <HomeScreen/>}
