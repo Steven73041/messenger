@@ -68,7 +68,7 @@ const Profile = () => {
                 <div className="profileContainer">
                     <div className="row">
                         <div className="col-sm-3">
-                            <Avatar className="profileAvatar" src={user.photoUrl}/>
+                            <Avatar className="profileAvatar" src={profile.photoUrl}/>
                         </div>
                         <div className="col-sm-9">
                             <h2 className="profileName">
@@ -87,12 +87,12 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="row justify-content-center postsContainer">
-                        {posts.length &&
-                        <FlipMove typeName="ul" id="postsList" className="postsList profilePostsList">
-                            {posts.map(item => (
-                                <Post user={profile} post={item} key={item.id}/>
-                            ))}
-                        </FlipMove>}
+                        {posts.length ?
+                            <FlipMove typeName="ul" id="postsList" className="postsList profilePostsList">
+                                {posts.map(item => (
+                                    <Post user={profile} post={item} key={item.id}/>
+                                ))}
+                            </FlipMove> : null}
                     </div>
                 </div>
                 :
