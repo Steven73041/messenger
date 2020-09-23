@@ -8,7 +8,8 @@ const UserItem = ({itemUser}) => {
 
     useEffect(() => {
         window.Echo.channel(`messages.${itemUser.id}.${user.email}`).listen(`.NewMessage`, (e) => {
-            if (itemUser.id !== user.id) {
+            if (e.currentUser.id !== user.id) {
+                playSound();
                 setNewMessages(true);
             }
         });
@@ -16,6 +17,11 @@ const UserItem = ({itemUser}) => {
 
     const clearNewMessage = (e) => {
         setNewMessages(false);
+    }
+
+    const playSound = () => {
+        let audio = new Audio('/sounds/newMessage.mp3');
+        audio.play();
     }
 
     return (

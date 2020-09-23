@@ -49,6 +49,7 @@ class NewMessage implements ShouldBroadcastNow {
 
     public function broadcastWith() {
         return [
+            'currentUser' => $this->currentUser,
             'message' => $this->message,
             'user' => $this->userReceiver
         ];
