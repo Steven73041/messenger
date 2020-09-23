@@ -18,15 +18,17 @@ class NewMessage implements ShouldBroadcastNow {
 
     public $message;
     public $userReceiver;
+    public $currentUser;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $userReceiver) {
+    public function __construct($message, $userReceiver, $currentUser) {
         $this->message = $message;
         $this->userReceiver = $userReceiver;
+        $this->currentUser = $currentUser;
     }
 
     /**
@@ -36,8 +38,8 @@ class NewMessage implements ShouldBroadcastNow {
      */
     public function broadcastOn() {
         return [
-            new Channel('messages.' . $this->userReceiver->id),
-            new Channel('messages.' . $this->message->userId)
+            new Channel('messages.' . $this->userReceiver->id . '.' . $this->currentUser->email),
+            new Channel('messages.' . $this->currentUser->id . '.' . $this->userReceiver->email),
         ];
     }
 

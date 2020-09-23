@@ -11,26 +11,29 @@ import {actionTypes} from "../../reducer";
 
 const Messages = () => {
     let {id} = useParams();
+    const [receiver, setReceiver] = useState(null);
     const [messages, setMessages] = useState([]);
     const [errors, setErrors] = useState('');
     const [{user, token}, dispatch] = useStateValue();
 
     useEffect(() => {
-        fetchMessages(id);
+        window.Echo.leave(`messages.${user.id}.${receiver}`);
+        setReceiver(id);
     }, [id]);
 
     useEffect(() => {
-        window.Echo.channel(`messages.${user.id}`).listen(`.NewMessage`, (e) => {
-            fetchMessages(e.user.email);
+        window.Echo.channel(`messages.${user.id}.${receiver}`).listen(`.NewMessage`, (e) => {
+            fetchMessages();
         });
-    }, []);
+        fetchMessages();
+    }, [receiver]);
 
-    const fetchMessages = (email) => {
+    const fetchMessages = () => {
         dispatch({
             type: actionTypes.SET_LOADING_TERM,
             loading: true,
         });
-        window.axios.get(`${Constants.domain}${Constants.messages}/${email}/${user.email}`, {
+        window.axios.get(`${Constants.domain}${Constants.messages}/${id}/${user.email}`, {
             headers: {
                 Authorization: 'Bearer ' + token
             }
@@ -39,7 +42,7 @@ const Messages = () => {
                 setMessages(response.data);
                 const messagesList = document.getElementById("messagesList");
                 if (messagesList) {
-                    messagesList.scrollTop = 1000;
+                    messagesList.scrollTop = 10000;
                 }
             } else {
                 setErrors(response.data.errors);

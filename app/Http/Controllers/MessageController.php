@@ -58,7 +58,7 @@ class MessageController extends Controller {
         date_default_timezone_set('Europe/Athens');
         $message->created_at = date('Y-m-d H:i:s');
         $message->save();
-        event(new NewMessage($message, $userReceiver));
+        event(new NewMessage($message, $userReceiver, auth('api')->user()));
         return response($message, 200);
     }
 
@@ -81,7 +81,7 @@ class MessageController extends Controller {
     public function destroy(Request $request) {
         $message = Message::find($request->id);
         $message->delete();
-        event(new NewMessage($message, User::find($message->receiverUserId)));
+        event(new NewMessage($message, User::find($message->receiverUserId), auth('api')->user()));
         return response(['messages' => 'success'], 200);
     }
 }
