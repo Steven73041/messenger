@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import '../styles/Sidebar.css';
 import {useStateValue} from '../StateProvider';
 import Constants from "./Constants";
+import UserItem from "./UserItem";
 
 const Sidebar = () => {
     const [users, setUsers] = useState([]);
@@ -30,7 +30,7 @@ const Sidebar = () => {
                 <ul className="usersList">
                     {users.map(user => (
                         <li key={user.id}>
-                            <Link className="chatUser" to={`/chat/${user.email}`}>{user.name}</Link>
+                            <UserItem itemUser={user}/>
                         </li>
                     ))}
                 </ul> : null}

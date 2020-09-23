@@ -69,7 +69,7 @@ const Messages = () => {
                     <FlipMove typeName="ul" id="messagesList" className="messagesList">
                         {messages.map(item => (
                             <Message currentUserMessage={user.id === item.message.userId}
-                                     message={item.message} key={item.message.id} user={item.user} email={id}/>
+                                     message={item.message} key={item.message.id} messageUser={item.user} email={id}/>
                         ))}
                     </FlipMove> : <div>No messages found</div>}
 
